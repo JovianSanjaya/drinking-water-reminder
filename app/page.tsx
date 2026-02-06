@@ -8,32 +8,37 @@ export default function Home() {
   const [showNotification, setShowNotification] = useState(false);
   const [reminderInterval, setReminderInterval] = useState(30); // minutes
   const [lastDrinkTime, setLastDrinkTime] = useState<Date | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   const motivationalMessages = [
-    "You&apos;re doing amazing! 💧✨",
-    "Your skin will thank you! 🌟",
-    "Stay hydrated, stay happy! 😊",
-    "Water is the key to glow! ✨",
-    "Keep up the great work! 🎉",
-    "You&apos;re a hydration champion! 🏆",
-    "Your body loves you! 💙",
-    "Drink up, buttercup! 🌸",
-    "Glowing skin starts here! ✨",
-    "You deserve to feel great! 🌈",
+    "you're doing great!",
+    "proud of you for taking care of yourself",
+    "your body thanks you",
+    "keep up the good work",
+    "you're taking such good care of yourself",
+    "that's another step towards healthy habits",
+    "you're doing amazing, really",
+    "your future self will thank you",
+    "look at you being so responsible",
+    "you're absolutely crushing it",
   ];
 
   const reminderMessages = [
-    "Time to drink water! 💧",
-    "Don't forget to hydrate! 🌊",
-    "Water break time! 💙",
-    "Your body is calling for water! 📞",
-    "Hydration time, friend! 🤗",
-    "Quick! Grab some water! 💦",
-    "Stay fresh, drink water! 🌿",
+    "hey, drink some water",
+    "water break time",
+    "time to hydrate",
+    "don't forget your water",
+    "quick water check",
+    "hydrate yourself",
+    "water time!",
   ];
 
   const goalGlasses = 8;
   const progress = (waterCount / goalGlasses) * 100;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     // Load saved data from localStorage
@@ -92,9 +97,8 @@ export default function Home() {
     
     // Request browser notification
     if ("Notification" in window && Notification.permission === "granted") {
-      new Notification("Water Reminder 💧", {
+      new Notification("water reminder", {
         body: message,
-        icon: "💧",
       });
     }
   };
@@ -117,80 +121,108 @@ export default function Home() {
   const resetCount = () => {
     setWaterCount(0);
     setLastDrinkTime(null);
-    setCurrentMessage("Fresh start! Let's hydrate! 🌟");
+    setCurrentMessage("reset! let's start fresh");
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 3000);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-blue-50 to-purple-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-8 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-200 rounded-full blur-3xl opacity-50 -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-200 rounded-full blur-3xl opacity-50 -z-10"></div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white rounded-3xl cute-shadow p-8">
+        
+        {/* Cute illustration */}
+        <div className="flex justify-center mb-6">
+          <div className="relative water-ripple">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Water glass */}
+              <path d="M35 25L40 95C40 100.523 44.4772 105 50 105H70C75.5228 105 80 100.523 80 95L85 25H35Z" 
+                    fill="url(#waterGradient)" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round"/>
+              {/* Water inside */}
+              <ellipse cx="60" cy="70" rx="18" ry="8" fill="#60A5FA" opacity="0.6"/>
+              <path d="M42 70C42 65 48 60 60 60C72 60 78 65 78 70V85C78 90 72 95 60 95C48 95 42 90 42 85V70Z" 
+                    fill="url(#waterFill)" opacity="0.8"/>
+              {/* Shine effect */}
+              <ellipse cx="52" cy="45" rx="8" ry="15" fill="white" opacity="0.3"/>
+              
+              <defs>
+                <linearGradient id="waterGradient" x1="60" y1="25" x2="60" y2="105" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#DBEAFE"/>
+                  <stop offset="1" stopColor="#BFDBFE"/>
+                </linearGradient>
+                <linearGradient id="waterFill" x1="60" y1="60" x2="60" y2="95" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#60A5FA"/>
+                  <stop offset="1" stopColor="#3B82F6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 mb-2">
-            Water Reminder 💧
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            water tracker
           </h1>
-          <p className="text-gray-600 text-sm">Stay hydrated, stay healthy!</p>
+          <p className="text-gray-500 text-sm">for your friend</p>
         </div>
 
         {/* Notification popup */}
         {showNotification && (
-          <div className="mb-6 bg-gradient-to-r from-blue-400 to-purple-400 text-white p-4 rounded-2xl shadow-lg animate-bounce text-center">
+          <div className="mb-6 bg-indigo-50 border-2 border-indigo-200 text-indigo-900 p-4 rounded-2xl text-sm font-medium text-center">
             {currentMessage}
           </div>
         )}
 
-        {/* Water glass counter */}
-        <div className="text-center mb-8">
-          <div className="text-7xl mb-4 animate-pulse">💧</div>
-          <div className="text-5xl font-bold text-blue-600 mb-2">{waterCount}</div>
-          <p className="text-gray-600">glasses today</p>
-          <p className="text-sm text-gray-500 mt-2">Goal: {goalGlasses} glasses</p>
+        {/* Water counter */}
+        <div className="mb-8 text-center">
+          <div className="inline-flex items-baseline gap-3 bg-blue-50 px-8 py-4 rounded-2xl">
+            <div className="text-6xl font-bold text-blue-600">{waterCount}</div>
+            <div className="text-gray-600 text-left">
+              <div className="text-sm font-medium">glasses</div>
+              <div className="text-xs">of {goalGlasses}</div>
+            </div>
+          </div>
         </div>
 
         {/* Progress bar */}
         <div className="mb-8">
-          <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+          <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-blue-400 to-purple-500 h-4 rounded-full transition-all duration-500 ease-out"
+              className="bg-gradient-to-r from-blue-400 to-indigo-500 h-3 rounded-full transition-all duration-500"
               style={{ width: `${Math.min(progress, 100)}%` }}
             ></div>
           </div>
-          <p className="text-center text-sm text-gray-600 mt-2">
-            {Math.round(progress)}% of daily goal
+          <p className="text-xs text-gray-500 mt-2 text-center">
+            {Math.round(progress)}% of your daily goal
           </p>
         </div>
 
         {/* Action buttons */}
-        <div className="space-y-4 mb-6">
+        <div className="space-y-3 mb-6">
           <button
             onClick={addWater}
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transform transition hover:scale-105 active:scale-95"
+            className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-4 px-6 rounded-2xl transition-all shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300"
           >
-            I Drank Water! 💧
+            i drank water
           </button>
           
           <button
             onClick={resetCount}
-            className="w-full bg-pink-100 hover:bg-pink-200 text-pink-600 font-semibold py-3 px-6 rounded-2xl transition"
+            className="w-full bg-gray-50 hover:bg-gray-100 text-gray-600 font-medium py-3 px-6 rounded-2xl transition-colors border border-gray-200"
           >
-            Reset Count
+            reset count
           </button>
         </div>
 
         {/* Reminder settings */}
-        <div className="bg-blue-50 rounded-2xl p-4 mb-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Remind me every:
+        <div className="bg-purple-50 rounded-2xl p-5 mb-4 border-2 border-purple-100">
+          <label className="block text-sm font-semibold text-gray-700 mb-3">
+            remind me every
           </label>
           <select
             value={reminderInterval}
             onChange={(e) => setReminderInterval(Number(e.target.value))}
-            className="w-full p-2 rounded-lg border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 rounded-xl border-2 border-purple-200 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent bg-white"
           >
             <option value={15}>15 minutes</option>
             <option value={30}>30 minutes</option>
@@ -200,28 +232,27 @@ export default function Home() {
         </div>
 
         {/* Enable notifications button */}
-        {typeof window !== "undefined" && "Notification" in window && Notification.permission === "default" && (
+        {isMounted && "Notification" in window && Notification.permission === "default" && (
           <button
             onClick={requestNotificationPermission}
-            className="w-full bg-yellow-100 hover:bg-yellow-200 text-yellow-700 font-semibold py-3 px-6 rounded-2xl transition text-sm"
+            className="w-full bg-amber-50 hover:bg-amber-100 text-amber-800 border-2 border-amber-200 font-medium py-3 px-6 rounded-2xl transition-colors text-sm"
           >
-            🔔 Enable Browser Notifications
+            turn on reminders
           </button>
         )}
 
         {/* Last drink time */}
         {lastDrinkTime && (
-          <p className="text-center text-xs text-gray-500 mt-4">
-            Last drink: {lastDrinkTime.toLocaleTimeString()}
+          <p className="text-center text-xs text-gray-400 mt-5">
+            last glass: {lastDrinkTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </p>
         )}
 
         {/* Achievement message */}
         {waterCount >= goalGlasses && (
-          <div className="mt-6 text-center p-4 bg-gradient-to-r from-yellow-200 to-orange-200 rounded-2xl">
-            <p className="text-2xl mb-2">🎉 🏆 🎉</p>
-            <p className="font-bold text-orange-600">Amazing! You hit your goal!</p>
-            <p className="text-sm text-orange-600">You&apos;re a hydration superstar!</p>
+          <div className="mt-6 text-center p-5 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl">
+            <p className="text-lg font-bold text-green-800 mb-1">goal complete!</p>
+            <p className="text-sm text-green-700">you did an amazing job today</p>
           </div>
         )}
       </div>

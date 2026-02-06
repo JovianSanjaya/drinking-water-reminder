@@ -1,102 +1,55 @@
-# 💧 Drinking Water Reminder App
+# water tracker
 
-A cute and friendly water reminder app built with Next.js and React to help you stay hydrated throughout the day!
+a simple app to help my friend remember to drink water
 
-## ✨ Features
+## what it does
 
-- 🎯 **Daily Water Goal Tracking** - Track your water intake with a goal of 8 glasses per day
-- 💬 **Motivational Messages** - Get encouraging messages every time you log a glass of water
-- ⏰ **Smart Reminders** - Set custom reminder intervals (15min, 30min, 1hr, 2hr)
-- 🔔 **Browser Notifications** - Optional push notifications to remind you to drink water
-- 📊 **Progress Bar** - Visual progress indicator to see how close you are to your daily goal
-- 💾 **Auto-Save** - Your progress is automatically saved and resets daily
-- 🎨 **Cute Design** - Beautiful gradient UI with playful animations
-- 🏆 **Achievement Celebration** - Special message when you reach your daily goal
+- tracks how many glasses you drank today
+- reminds you to drink water at intervals you choose
+- shows encouraging messages when you log water
+- saves your progress (resets each day)
+- works on phone and desktop
 
-## 🚀 Getting Started
+## how to run
 
-### Prerequisites
-
-- Node.js 18+ installed
-- npm or yarn package manager
-
-### Installation
-
-1. Install dependencies:
 ```bash
 npm install
-```
-
-2. Run the development server:
-```bash
 npm run dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+open localhost:3000
 
-## 🌐 Deploy on Vercel
+## deploying
 
-The easiest way to deploy this app is using [Vercel](https://vercel.com):
+easiest way is vercel:
+- push to github
+- import to vercel
+- done
 
-1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
-2. Import your repository to Vercel
-3. Vercel will automatically detect Next.js and deploy your app
-4. Your app will be live in minutes!
+or use vercel cli:
+```bash
+vercel
+```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+## how to use
 
-## 🎮 How to Use
+1. click "i drank water" when you finish a glass
+2. set reminder interval in the settings
+3. enable browser notifications if you want
+4. try to hit 8 glasses a day
 
-1. **Track Water Intake**: Click "I Drank Water! 💧" every time you finish a glass
-2. **Set Reminders**: Choose your preferred reminder interval from the dropdown
-3. **Enable Notifications**: Click the notification button to get browser alerts
-4. **Reset Daily**: The counter automatically resets at midnight, or use the reset button
-5. **Reach Your Goal**: Aim for 8 glasses a day and celebrate when you achieve it!
+## tech
 
-## 🛠️ Built With
+- next.js
+- react
+- typescript
+- tailwind
 
-- **Next.js 15** - React framework for production
-- **React 19** - UI library
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **localStorage** - Data persistence
-- **Notification API** - Browser notifications
+## changing stuff
 
-## 📱 Features in Detail
+- messages are in `app/page.tsx` 
+- change the goal from 8 to whatever
+- colors and fonts in `app/globals.css`
 
-### Motivational Messages
-- 10+ unique encouraging messages
-- Randomly displayed when you log water intake
-- Keeps you motivated throughout the day
+made for a friend who forgets to drink water
 
-### Reminder System
-- Customizable intervals
-- Tracks time since last drink
-- Browser notifications (with permission)
-- Visual popup reminders
-
-### Data Persistence
-- Saves your progress automatically
-- Resets daily at midnight
-- Remembers last drink time
-- Works offline
-
-## 🎨 Customization
-
-You can easily customize the app by editing:
-- **Messages**: Update the `motivationalMessages` and `reminderMessages` arrays in `app/page.tsx`
-- **Goal**: Change the `goalGlasses` constant (default is 8)
-- **Colors**: Modify the Tailwind classes or `globals.css`
-- **Intervals**: Add more reminder interval options
-
-## 📄 License
-
-Free to use for personal projects!
-
-## 💝 Made with Love
-
-Created to help friends stay healthy and hydrated! 💙
-
----
-
-**Stay hydrated, stay happy!** 🌟

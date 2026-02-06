@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Water Reminder 💧",
-  description: "Stay hydrated with cute reminders!",
+  title: "water tracker",
+  description: "stay hydrated",
 };
 
 export default function RootLayout({

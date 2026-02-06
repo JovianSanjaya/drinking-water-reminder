@@ -2,13 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
 :root {
-  --background: #fef6f9;
-  --foreground: #333;
+  --background: #fef9f3;
+  --foreground: #2d3436;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Arial', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.cute-shadow {
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.water-ripple {
+  animation: ripple 2s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
 }
